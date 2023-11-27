@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5435/jwt_security
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=7212Hey)
+    ports:
+      - '8080:8080'
+
+  db:
+    image: postgres:15.1-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=7212Hey)
+      - POSTGRES_DB=jwt_security
+    ports:
+      - '5435:5432'
+    volumes:
+      - ./src/main/resources/db-init:/docker-entrypoint-initdb.d

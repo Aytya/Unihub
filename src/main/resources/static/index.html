@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="#status"></p>
+<form id="attendanceForm">
+  <label for="message">Message:</label>
+  <input type="text" id="message" required>
+  <button type="button" onclick="markAttendance()">Mark Attendance</button>
+</form>
+<p>Attendance status:</p>
+<p id="result"></p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script>
+  const socket = new SockJS('/attendance-websocket');
+  const stompClient = Stomp.over(socket);
+
+  stompClient.connect({}, () => {
+    stompClient.subscribe('/topic/attendanceStatus', (response) => {
+      displayResult(response.body);
+    });
+  });
+
+  function markAttendance() {
+      stompClient.connect({}, () => {
+          stompClient.subscribe('/topic/attendance', (response) => {
+              displayResult(response.body);
+          });
+      });
+    const message = document.getElementById('message').value;
+    stompClient.send('/app/attendance', {}, message);
+  }
+
+  function displayResult(result) {
+    document.getElementById('result').textContent = result;
+  }
+</script>
+</body>
+</html>

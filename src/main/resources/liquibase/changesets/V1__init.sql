@@ -1,0 +1,67 @@
+-- create table if not exists users
+-- (
+--     id       bigserial primary key,
+--     first_name     varchar(255) not null,
+--     last_name     varchar(255) not null,
+--     email varchar(255) not null unique,
+--     password varchar(255) not null,
+--     department varchar(255) not null,
+--     program varchar(255) not null,
+--     yearOfEnrollment varchar(255) not null,
+--     yearOfSubmission varchar(255) not null,
+--     dateOfBirth varchar(255) not null,
+--     idNo varchar(255) not null,
+--     permanentAddress varchar(255) not null,
+--     maillingAddress varchar(255) not null,
+--     phone varchar(255) not null,
+--     nationality varchar(255) not null,
+-- );
+--
+-- create table if not exists professors
+-- (
+--     id              bigserial primary key,
+--     name     varchar(255) not null,
+--     qualification     varchar(255) null,
+--     dean          varchar(255) not null
+-- );
+--
+-- create table if not exists users_professors
+-- (
+--     user_id bigint not null,
+--     professors_id bigint not null,
+--     primary key (user_id, professors_id),
+--     constraint fk_users_professors_users foreign key (user_id) references users (id) on delete cascade on update no action,
+--     constraint fk_users_professors_users foreign key (professors_id) references professors (id) on delete cascade on update no action
+-- );
+--
+-- create table if not exists professors_users
+-- (
+--     professors_id bigint not null,
+--     user_id bigint not null,
+--     primary key (professors_id, user_id),
+--     constraint fk_professors_users_professors foreign key (professors_id) references professors (id) on delete cascade on update no action,
+--     constraint fk_professors_users_professors foreign key (users_id) references users (id) on delete cascade on update no action
+-- );
+--
+-- create table if not exists users_roles
+-- (
+--     user_id bigint       not null,
+--     role    varchar(255) not null,
+--     primary key (user_id, role),
+--     constraint fk_users_roles_users foreign key (user_id) references users (id) on delete cascade on update no action
+-- );
+--
+-- create table if not exists users_images
+-- (
+--     student_id bigint       not null,
+--     image   varchar(255) not null,
+--     constraint fk_tasks_images_tasks foreign key (task_id) references tasks (id) on delete cascade on update no action
+-- );
+--
+-- create table if not exists token
+-- (
+--     id              bigserial primary key,
+--     token     varchar(255) not null unique,
+--     qualification     varchar(255) null,
+--     dean          varchar(255) not null
+--     );
