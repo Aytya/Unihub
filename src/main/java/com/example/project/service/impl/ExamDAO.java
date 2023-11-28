@@ -1,4 +1,4 @@
-package com.example.project.service.dao;
+package com.example.project.service.impl;
 
 import com.example.project.model.exception.ResourceAlreadyExistsException;
 import com.example.project.model.exception.ResourceDoesNotExistException;

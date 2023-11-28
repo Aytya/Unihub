@@ -64,7 +64,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-
     @OneToMany(mappedBy = "user")
     @CollectionTable(name = "users_token")
     private List<Token> token;

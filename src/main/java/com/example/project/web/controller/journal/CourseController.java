@@ -4,6 +4,8 @@ import com.example.project.model.exception.ResourceAlreadyExistsException;
 import com.example.project.model.exception.ResourceDoesNotExistException;
 import com.example.project.model.domain.Course;
 import com.example.project.service.journal.CourseService;
+import com.example.project.web.dto.CourseCreateDTO;
+import com.example.project.web.mapper.CourseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,17 +18,19 @@ import java.util.List;
 //@CrossOrigin("http://127.0.0.1:4200")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "api/v1")
+@RequestMapping(value = "/api/v1")
 public class CourseController {
 
     @Autowired
     private CourseService courseService;
 
+
+
     @PostMapping(value = "/admin/course/new")
     @PreAuthorize("hasAuthority('admin:create')")
-    public ResponseEntity<Course> insertCourse(@RequestBody Course course) {
+    public ResponseEntity<Course> insertCourse(@RequestBody CourseCreateDTO courseCreateDTO) throws ResourceAlreadyExistsException {
         try {
-            Course insertedCourse = courseService.saveCourse(course);
+            Course insertedCourse = courseService.saveCourse(courseCreateDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(insertedCourse);
         } catch (ResourceAlreadyExistsException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
@@ -35,7 +39,7 @@ public class CourseController {
         }
     }
 
-    @GetMapping(value = "/{code}")
+    @GetMapping(value = "course/{code}")
     public ResponseEntity<Course> getCourse(@PathVariable Long code) throws ResourceDoesNotExistException {
         try {
             Course course = courseService.getCourseById(code);
@@ -50,7 +54,7 @@ public class CourseController {
         return ResponseEntity.ok().body(courseService.getAllCourses());
     }
 
-    @PutMapping(value = "admin/courses/update")
+    @PutMapping(value = "u")
     @PreAuthorize("hasAuthority('admin:update')")
     public ResponseEntity<Course> updateCourse(@RequestBody Long code, @RequestBody Course course) {
         try {

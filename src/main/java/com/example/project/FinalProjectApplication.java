@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.example.project","com.example.project.web.mapper"})
 public class FinalProjectApplication {
     private static final Logger logger = LoggerFactory.getLogger(FinalProjectApplication.class);
     public static void main(String[] args) {

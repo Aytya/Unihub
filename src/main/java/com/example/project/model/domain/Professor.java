@@ -1,7 +1,5 @@
 package com.example.project.model.domain;
 
-import com.example.project.model.domain.Course;
-import com.example.project.model.domain.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,9 +25,10 @@ public class Professor implements Serializable {
     private String qualification;
     private String dean;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "courses")
     private List<Course> courseList;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<User> studentList;
 
     @ManyToOne

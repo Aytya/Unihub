@@ -1,10 +1,14 @@
-package com.example.project.service.dao;
+package com.example.project.service.impl;
 
+import com.example.project.model.domain.Faculty;
 import com.example.project.model.exception.ResourceAlreadyExistsException;
 import com.example.project.model.exception.ResourceDoesNotExistException;
 import com.example.project.model.domain.Course;
-import com.example.project.repository.domain.CourseRepository;
+import com.example.project.repository.faculty.CourseRepository;
+import com.example.project.repository.faculty.FacultyRepository;
+import com.example.project.service.journal.CourseMapper2;
 import com.example.project.service.journal.CourseService;
+import com.example.project.web.dto.CourseCreateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,9 @@ import java.util.Optional;
 public class CourseDAO implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private FacultyRepository facultyRepository;
+    private final CourseMapper2 courseMapper;
 
     @Override
     public List<Course> getAllCourses() {
@@ -28,12 +35,18 @@ public class CourseDAO implements CourseService {
     }
 
     @Override
-    public Course saveCourse(Course course) throws ResourceAlreadyExistsException {
-        Optional<Course> optionalCourse = courseRepository.findById(course.getCourseCode());
+    public Course saveCourse(CourseCreateDTO courseCreateDTO) throws ResourceAlreadyExistsException {
+        Course courseToSave = courseMapper.toCourse(courseCreateDTO);
+        Faculty faculty = facultyRepository.findById
+                (courseCreateDTO.getFaculty_id()).get();
+        courseToSave.setFaculty(faculty);
+        Optional<Course> optionalCourse = courseRepository.findById(courseToSave.getCourseCode());
         if (optionalCourse.isPresent()) {
-            throw new ResourceAlreadyExistsException(course.getCourseCode());
+            throw new ResourceAlreadyExistsException(courseToSave.getCourseCode());
         } else {
-            return courseRepository.save(course);
+            Course savedCourse =  courseRepository.save(courseToSave);
+            return savedCourse;
+
         }
     }
 

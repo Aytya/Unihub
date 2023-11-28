@@ -1,7 +1,7 @@
 package com.example.project.web.controller;
 
 import com.example.project.model.domain.User;
-import com.example.project.model.reponseModels.UserInfoResponse;
+import com.example.project.model.attendance.reponseModels.UserInfoResponse;
 import com.example.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

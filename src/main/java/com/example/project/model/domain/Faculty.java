@@ -1,6 +1,7 @@
 package com.example.project.model.domain;
 
 
+import com.example.project.model.domain.Course;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +19,8 @@ public class Faculty implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
-    private Long faculty_id;
+    private Long id;
+
     private String facultyName;
     private String deanName;
     private String managerName;
@@ -27,15 +28,16 @@ public class Faculty implements Serializable {
     @Column(unique = true,length = 1024)
     private Long phoneNumber;
 
-    @OneToMany
-    @CollectionTable(name = "courses")
+    @OneToMany(mappedBy = "faculty", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
+    //@JoinColumn(name = "faculty", referencedColumnName = "id",nullable = false)
     private List<Course> courseList;
 
-    @OneToMany
+    @OneToMany(mappedBy = "faculty", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
     @CollectionTable(name = "professors")
     private List<Professor> professorList;
 
-    @OneToMany
+    @OneToMany(mappedBy = "faculty", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
     @CollectionTable(name = "students")
     private List<User> studentList;
+
 }

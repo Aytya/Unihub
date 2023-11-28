@@ -1,6 +1,5 @@
 package com.example.project.web.controller.faculty;
 
-import com.example.project.model.domain.Course;
 import com.example.project.model.domain.Faculty;
 import com.example.project.model.exception.ResourceAlreadyExistsException;
 import com.example.project.model.exception.ResourceDoesNotExistException;

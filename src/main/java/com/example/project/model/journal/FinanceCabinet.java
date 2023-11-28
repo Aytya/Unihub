@@ -1,4 +1,4 @@
-package com.example.project.model.finance;
+package com.example.project.model.journal;
 
 import com.example.project.model.domain.User;
 import jakarta.persistence.*;
@@ -13,7 +13,7 @@ import java.sql.Date;
 public class FinanceCabinet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long accountId;
+    private Long id;
     private Long semester;
     private String type;//retake or fx or just student semester's fee
     private Long totalAmount;//total

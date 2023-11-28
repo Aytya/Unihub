@@ -1,4 +1,4 @@
-package com.example.project.model.reponseModels;
+package com.example.project.model.attendance.reponseModels;
 
 import com.example.project.model.role.Role;
 import jakarta.persistence.EnumType;

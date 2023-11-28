@@ -1,7 +1,6 @@
 package com.example.project.web.security.config;
 
-import com.example.project.repository.domain.UserRepository;
-import com.example.project.service.props.MinioProperties;
+import com.example.project.repository.faculty.UserRepository;
 import io.minio.MinioClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationConfig {
 
     private final UserRepository repository;
-    private final MinioProperties minioProperties;
 
     @Bean
     public UserDetailsService userDetailsService() {
