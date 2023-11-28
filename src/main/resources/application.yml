@@ -1,3 +1,4 @@
+
 spring:
   datasource:
 #    url: jdbc:postgresql://localhost:5435/jwt_security
@@ -10,7 +11,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:

@@ -1,5 +1,6 @@
 package com.example.project.web.controller;
 
+import com.example.project.web.dto.UserDto;
 import com.example.project.web.dto.UserImageDto;
 import com.example.project.web.dto.auth.AuthenticationResponse;
 import com.example.project.web.dto.auth.StudentRequest;
@@ -27,13 +28,14 @@ public class AdminController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
     private UserImageMapper userImageMapper;
 
     @Autowired
     private AuthenticationService authenticationService;
 
     @GetMapping("/students/{id}")
-    @PreAuthorize("hasAuthority('admin:read')")
+//    @PreAuthorize("hasAuthority('admin:read')")
     public ResponseEntity<User> getStudentById(@PathVariable Long id) {
         try {
             System.out.println("AdminController");
@@ -57,19 +59,10 @@ public class AdminController {
         return ResponseEntity.ok(authenticationService.registrationStudent(student));
     }
 
-    @PutMapping("/students/{id}")
-    public String updateStudent(@PathVariable Long id,
-                                @ModelAttribute("student") User student,
-                                Model model) throws ResourceDoesNotExistException {
-
-        User existingStudent = studentService.getStudentById(id);
-        existingStudent.setId(id);
-        existingStudent.setFirstName(student.getFirstName());
-        existingStudent.setLastName(student.getLastName());
-        existingStudent.setEmail(student.getEmail());
-
-        studentService.updateStudent(existingStudent);
-        return "redirect:/students";
+    @PostMapping("student/{id}")
+    public ResponseEntity<User> updateStudent(@PathVariable Long id,
+                                @ModelAttribute("student") User student) throws ResourceDoesNotExistException {
+        return ResponseEntity.ok(studentService.updateStudent(student, id));
     }
 
     @GetMapping(value = "student/all")

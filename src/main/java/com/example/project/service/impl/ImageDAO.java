@@ -1,10 +1,9 @@
-package com.example.project.service.dao;
+package com.example.project.service.impl;
 
 import com.example.project.model.domain.UserImage;
 import com.example.project.model.exception.ImageUploadException;
 import com.example.project.service.users.ImageService;
 import io.minio.*;
-import com.example.project.service.props.MinioProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;

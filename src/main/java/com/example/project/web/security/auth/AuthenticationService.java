@@ -6,7 +6,7 @@ import com.example.project.web.dto.auth.AuthenticationResponse;
 import com.example.project.web.dto.auth.RegistrationRequest;
 import com.example.project.web.dto.auth.StudentRequest;
 import com.example.project.model.domain.User;
-import com.example.project.repository.domain.UserRepository;
+import com.example.project.repository.faculty.UserRepository;
 import com.example.project.web.token.Token;
 import com.example.project.web.token.TokenRepository;
 import com.example.project.web.token.TokenType;

@@ -1,12 +1,13 @@
-package com.example.project.service.dao;
+package com.example.project.service.impl;
 
 import com.example.project.model.domain.UserImage;
 import com.example.project.model.exception.ResourceDoesNotExistException;
 import com.example.project.model.role.Role;
 import com.example.project.model.domain.User;
-import com.example.project.repository.domain.UserRepository;
+import com.example.project.repository.faculty.UserRepository;
 import com.example.project.service.users.ImageService;
 import com.example.project.service.users.StudentService;
+import com.example.project.web.mapper.UserMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class StudentDAO implements StudentService {
     @Autowired
     private UserRepository userRepository;
     private final ImageService imageService;
+    private final UserMapper userMapper;
     @Override
     public List<User> getAllStudents() {
         List<User> studentList = new ArrayList<>();
@@ -50,10 +52,17 @@ public class StudentDAO implements StudentService {
         }else throw new ResourceDoesNotExistException(id);
     }
 
+    @Transactional
     @Override
-    public void updateStudent(User student) throws ResourceDoesNotExistException {
-        User existingStudent = getStudentById(student.getId());
+    public User updateStudent(User user, Long id) throws ResourceDoesNotExistException {
+        User existingStudent = getStudentById(id);
+//        userMapper.updateStudentFromDto(userDto, existingStudent);
+//        existingStudent.setEmail(user.getEmail());
+//        existingStudent.setFaculty(user.getFaculty());
+//        existingStudent.setDepartment(user.getDepartment());
+//        existingStudent.setPhone(user.getPhone());
         userRepository.save(existingStudent);
+        return existingStudent;
     }
 
     @Override

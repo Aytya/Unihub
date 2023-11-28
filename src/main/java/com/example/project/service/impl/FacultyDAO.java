@@ -1,4 +1,4 @@
-package com.example.project.service.dao;
+package com.example.project.service.impl;
 
 import com.example.project.model.domain.Faculty;
 import com.example.project.model.exception.ResourceAlreadyExistsException;
@@ -29,9 +29,9 @@ public class FacultyDAO implements FacultyService {
 
     @Override
     public Faculty save(Faculty faculty) throws ResourceAlreadyExistsException {
-        Optional<Faculty> optionalFaculty = facultyRepository.findById(faculty.getFaculty_id());
+        Optional<Faculty> optionalFaculty = facultyRepository.findById(faculty.getId());
         if(optionalFaculty.isPresent()) {
-            throw new ResourceAlreadyExistsException(faculty.getFaculty_id());
+            throw new ResourceAlreadyExistsException(faculty.getId());
         } else {
             return facultyRepository.save(faculty);
         }
@@ -53,7 +53,7 @@ public class FacultyDAO implements FacultyService {
             faculty.setDeanName(faculty.getDeanName());
             facultyRepository.save(faculty);
         } else {
-            throw new ResourceDoesNotExistException(faculty.getFaculty_id());
+            throw new ResourceDoesNotExistException(faculty.getId());
         }
         return faculty;
     }

@@ -1,4 +1,4 @@
-package com.example.project.service.dao;
+package com.example.project.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
