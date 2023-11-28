@@ -57,7 +57,7 @@ public class AdminController {
         return ResponseEntity.ok(authenticationService.registrationStudent(student));
     }
 
-    @PostMapping("/students/{id}")
+    @PutMapping("/students/{id}")
     public String updateStudent(@PathVariable Long id,
                                 @ModelAttribute("student") User student,
                                 Model model) throws ResourceDoesNotExistException {
