@@ -3,10 +3,12 @@ package com.example.project.model.attendance;
 import com.example.project.model.domain.User;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.*;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity(name = "attendance")
@@ -22,10 +24,13 @@ public class Attendance {
 
 //    private Date startDate;
 //    private Date endDate;
+    @NotNull
     private String _group;
     private Long duration;
     private Boolean unlock;
     private Long lastUpdateTime;
+    @Nullable
+    private LocalDateTime startTime;
 //    private Long diffInSeconds;
 //    private Long diffInMinutes;
 //    private Long diffInHours;

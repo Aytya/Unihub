@@ -11,10 +11,10 @@ import static com.example.project.model.role.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {
-
     USER(Collections.emptySet()),
     ADMIN(
             Set.of(
+
                     ADMIN_READ,
                     ADMIN_UPDATE,
                     ADMIN_DELETE,
@@ -23,6 +23,10 @@ public enum Role {
                     MANAGER_UPDATE,
                     MANAGER_DELETE,
                     MANAGER_CREATE
+//                    USER_READ,
+//                    USER_UPDATE,
+//                    USER_DELETE,
+//                    USER_CREATE
             )
     ),
     MANAGER(
@@ -32,8 +36,13 @@ public enum Role {
                     MANAGER_DELETE,
                     MANAGER_CREATE
             )
-    )
-
+    ),
+//    USER(Set.of(
+//            USER_READ,
+//            USER_UPDATE,
+//            USER_DELETE,
+//            USER_CREATE
+//    )),
     ;
     @Getter
     private final Set<Permission> permissions;
