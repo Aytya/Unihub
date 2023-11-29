@@ -21,6 +21,6 @@ services:
       - POSTGRES_PASSWORD=7212Hey)
       - POSTGRES_DB=jwt_security
     ports:
-      - '5435:5432'
+      - '8081:8081'
     volumes:
       - ./src/main/resources/db-init:/docker-entrypoint-initdb.d
