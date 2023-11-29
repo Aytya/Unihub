@@ -39,5 +39,4 @@ public class Faculty implements Serializable {
     @OneToMany(mappedBy = "faculty", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
     @CollectionTable(name = "students")
     private List<User> studentList;
-
 }
