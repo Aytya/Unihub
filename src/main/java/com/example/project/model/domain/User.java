@@ -1,5 +1,6 @@
 package com.example.project.model.domain;
 
+
 import com.example.project.model.role.Role;
 import com.example.project.web.token.Token;
 import jakarta.persistence.*;
@@ -27,9 +28,7 @@ public class User implements UserDetails {
     private String lastName;
     private String email;//username
     private String password;
-
     private String passwordConfirmation;
-
     @Column(name = "image")
     @CollectionTable(name = "students_images")
     @ElementCollection
