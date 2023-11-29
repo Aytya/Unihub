@@ -3,7 +3,7 @@ package com.example.project.service.impl;
 import com.example.project.model.exception.ResourceAlreadyExistsException;
 import com.example.project.model.exception.ResourceDoesNotExistException;
 import com.example.project.model.domain.Professor;
-import com.example.project.repository.faculty.ProfessorRepository;
+import com.example.project.repository.ProfessorRepository;
 import com.example.project.service.users.ProfessorService;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

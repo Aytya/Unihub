@@ -3,7 +3,7 @@ package com.example.project.service.impl;
 import com.example.project.model.domain.Faculty;
 import com.example.project.model.exception.ResourceAlreadyExistsException;
 import com.example.project.model.exception.ResourceDoesNotExistException;
-import com.example.project.repository.faculty.FacultyRepository;
+import com.example.project.repository.FacultyRepository;
 import com.example.project.service.users.FacultyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

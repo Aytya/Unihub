@@ -1,4 +1,4 @@
-package com.example.project.model.journal;
+package com.example.project.model.domain;
 
 import com.example.project.model.domain.User;
 import jakarta.persistence.*;

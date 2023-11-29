@@ -1,4 +1,4 @@
-package com.example.project.repository.attendance;
+package com.example.project.repository;
 
 import com.example.project.model.attendance.Attendance;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -30,7 +30,6 @@ public class Professor implements Serializable {
     private List<Course> courseList;
     @OneToMany(cascade = CascadeType.ALL)
     private List<User> studentList;
-
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;

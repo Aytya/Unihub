@@ -4,7 +4,7 @@ import com.example.project.model.domain.UserImage;
 import com.example.project.model.exception.ResourceDoesNotExistException;
 import com.example.project.model.role.Role;
 import com.example.project.model.domain.User;
-import com.example.project.repository.faculty.UserRepository;
+import com.example.project.repository.UserRepository;
 import com.example.project.service.users.ImageService;
 import com.example.project.service.users.StudentService;
 import com.example.project.web.mapper.UserMapper;

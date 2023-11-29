@@ -1,9 +1,9 @@
-package com.example.project.web.controller.journal;
+package com.example.project.web.controller.faculty;
 
 import com.example.project.model.exception.ResourceAlreadyExistsException;
 import com.example.project.model.exception.ResourceDoesNotExistException;
 import com.example.project.model.domain.Course;
-import com.example.project.service.journal.CourseService;
+import com.example.project.service.CourseService;
 import com.example.project.web.dto.CourseCreateDTO;
 import com.example.project.web.mapper.CourseMapper;
 import lombok.RequiredArgsConstructor;

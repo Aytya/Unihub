@@ -1,4 +1,4 @@
-package com.example.project.service.journal;
+package com.example.project.web.mapper;
 
 
 import com.example.project.model.domain.Course;

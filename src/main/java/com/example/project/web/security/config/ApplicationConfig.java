@@ -1,6 +1,6 @@
 package com.example.project.web.security.config;
 
-import com.example.project.repository.faculty.UserRepository;
+import com.example.project.repository.UserRepository;
 import io.minio.MinioClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

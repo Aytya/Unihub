@@ -1,4 +1,4 @@
-package com.example.project.service.journal;
+package com.example.project.service;
 
 import com.example.project.model.exception.ResourceAlreadyExistsException;
 import com.example.project.model.exception.ResourceDoesNotExistException;

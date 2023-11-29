@@ -1,7 +1,7 @@
-package com.example.project.service.journal;
+package com.example.project.service;
 
 import com.example.project.model.attendance.Attendance;
-import com.example.project.repository.attendance.AttendanceRepository;
+import com.example.project.repository.AttendanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

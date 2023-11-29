@@ -1,7 +1,7 @@
-package com.example.project.web.controller.attendance;
+package com.example.project.web.controller.faculty;
 
 import com.example.project.model.attendance.Attendance;
-import com.example.project.service.journal.AttendanceService;
+import com.example.project.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

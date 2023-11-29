@@ -1,4 +1,4 @@
-package com.example.project.model.journal;
+package com.example.project.model.domain;
 
 import com.example.project.model.domain.Course;
 import jakarta.persistence.*;
@@ -24,4 +24,15 @@ public class Transcript {
 
     @OneToMany
     private List<Course> course;
+
+    private String studentName;
+    private String dean;
+    private String courseName;
+
+    private String date;
+    private float grade;
+    private boolean attendanceStatus;
+
+    private Long totalAttendance;
+    private Long totalMarks;
 }

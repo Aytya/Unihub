@@ -1,13 +1,8 @@
-
 spring:
   datasource:
-#    url: jdbc:postgresql://localhost:5435/jwt_security
-#    username: postgres
-#    password: 7212Hey)
-    url: jdbc:postgresql://localhost:5433/jwt_security
+    url: jdbc:postgresql://localhost:5432/jwt_security
     username: postgres
-    password: Mazayka2003
-
+    password: 7212Hey)
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -18,10 +13,14 @@ spring:
         format_sql: false
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    enabled: false
+    default-schema: jwt_security
+    change-log: classpath:liquibase/db.changelog.yaml
   docker:
     compose:
-      enabled: true
-      file: docker-compose.yml
+      enabled: false
+      file: ./docker-compose.yml
 
 application:
   security:
