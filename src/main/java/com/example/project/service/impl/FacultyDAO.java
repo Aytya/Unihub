@@ -1,8 +1,8 @@
 package com.example.project.service.impl;
 
-import com.example.project.model.domain.Faculty;
-import com.example.project.model.exception.ResourceAlreadyExistsException;
-import com.example.project.model.exception.ResourceDoesNotExistException;
+import com.example.project.domain.model.Faculty;
+import com.example.project.domain.exception.ResourceAlreadyExistsException;
+import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.repository.FacultyRepository;
 import com.example.project.service.users.FacultyService;
 import lombok.RequiredArgsConstructor;
@@ -46,15 +46,14 @@ public class FacultyDAO implements FacultyService {
     }
 
     @Override
-    public Faculty update(Faculty faculty, Long id) throws ResourceDoesNotExistException {
-        Optional<Faculty> optionalFaculty = facultyRepository.findById(id);
-        if(optionalFaculty.isPresent()) {
-            faculty.setFacultyName(faculty.getFacultyName());
-            faculty.setDeanName(faculty.getDeanName());
-            facultyRepository.save(faculty);
-        } else {
-            throw new ResourceDoesNotExistException(faculty.getId());
-        }
+    public Faculty update(final Faculty faculty, Long id) throws ResourceDoesNotExistException {
+        Faculty optionalFaculty = getFacultyById(id);
+        optionalFaculty.setFacultyName(faculty.getFacultyName());
+        optionalFaculty.setDeanName(faculty.getDeanName());
+        optionalFaculty.setManagerName(faculty.getManagerName());
+        optionalFaculty.setPhoneNumber(faculty.getPhoneNumber());
+
+        facultyRepository.save(faculty);
         return faculty;
     }
 

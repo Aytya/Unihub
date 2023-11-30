@@ -1,7 +1,7 @@
 package com.example.project.service.impl;
 
-import com.example.project.model.domain.UserImage;
-import com.example.project.model.exception.ImageUploadException;
+import com.example.project.domain.model.UserImage;
+import com.example.project.domain.exception.ImageUploadException;
 import com.example.project.service.users.ImageService;
 import io.minio.*;
 import lombok.RequiredArgsConstructor;

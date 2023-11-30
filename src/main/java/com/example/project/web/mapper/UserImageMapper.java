@@ -1,7 +1,7 @@
 package com.example.project.web.mapper;
 
 import com.example.project.web.dto.UserImageDto;
-import com.example.project.model.domain.UserImage;
+import com.example.project.domain.model.UserImage;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

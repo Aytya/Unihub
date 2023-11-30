@@ -1,6 +1,6 @@
 package com.example.project.web.controller.faculty;
 
-import com.example.project.model.attendance.Attendance;
+import com.example.project.domain.model.Attendance;
 import com.example.project.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

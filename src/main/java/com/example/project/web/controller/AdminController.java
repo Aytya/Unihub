@@ -1,13 +1,12 @@
 package com.example.project.web.controller;
 
-import com.example.project.web.dto.UserDto;
 import com.example.project.web.dto.UserImageDto;
 import com.example.project.web.dto.auth.AuthenticationResponse;
 import com.example.project.web.dto.auth.StudentRequest;
 import com.example.project.web.mapper.UserImageMapper;
-import com.example.project.model.domain.UserImage;
-import com.example.project.model.exception.ResourceDoesNotExistException;
-import com.example.project.model.domain.User;
+import com.example.project.domain.model.UserImage;
+import com.example.project.domain.exception.ResourceDoesNotExistException;
+import com.example.project.domain.model.User;
 import com.example.project.web.security.auth.AuthenticationService;
 import com.example.project.service.users.StudentService;
 import io.swagger.v3.oas.annotations.Operation;

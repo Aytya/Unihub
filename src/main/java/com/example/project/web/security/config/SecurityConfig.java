@@ -14,8 +14,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
-import static com.example.project.model.role.Permission.*;
-import static com.example.project.model.role.Role.*;
+import static com.example.project.domain.role.Permission.*;
+import static com.example.project.domain.role.Role.*;
 import static org.springframework.http.HttpMethod.*;
 
 @Configuration

@@ -1,9 +1,9 @@
 package com.example.project.service.impl;
 
-import com.example.project.model.domain.Faculty;
-import com.example.project.model.exception.ResourceAlreadyExistsException;
-import com.example.project.model.exception.ResourceDoesNotExistException;
-import com.example.project.model.domain.Course;
+import com.example.project.domain.model.Faculty;
+import com.example.project.domain.exception.ResourceAlreadyExistsException;
+import com.example.project.domain.exception.ResourceDoesNotExistException;
+import com.example.project.domain.model.Course;
 import com.example.project.repository.CourseRepository;
 import com.example.project.repository.FacultyRepository;
 import com.example.project.web.mapper.CourseMapper2;
@@ -35,19 +35,23 @@ public class CourseDAO implements CourseService {
     }
 
     @Override
-    public Course saveCourse(CourseCreateDTO courseCreateDTO) throws ResourceAlreadyExistsException {
-        Course courseToSave = courseMapper.toCourse(courseCreateDTO);
-        Faculty faculty = facultyRepository.findById
-                (courseCreateDTO.getFaculty_id()).get();
-        courseToSave.setFaculty(faculty);
-        Optional<Course> optionalCourse = courseRepository.findById(courseToSave.getCourseCode());
-        if (optionalCourse.isPresent()) {
-            throw new ResourceAlreadyExistsException(courseToSave.getCourseCode());
-        } else {
-            Course savedCourse =  courseRepository.save(courseToSave);
-            return savedCourse;
+    public Course saveCourse(CourseCreateDTO courseCreateDTO) throws ResourceAlreadyExistsException, ResourceDoesNotExistException {
+        Course courseToSave = new Course();
+        courseToSave.setCourseName(courseCreateDTO.getCourseName());
+        courseToSave.setCourseCode(courseCreateDTO.getCourseCode());
+        courseToSave.setCourseCreditHour(courseCreateDTO.getCourseCreditHour());
+        courseToSave.setPreRequisite(courseCreateDTO.getPreRequisite());
+        courseToSave.setSemester(courseCreateDTO.getSemester());
 
-        }
+        Faculty faculty = facultyRepository.findByFacultyName(courseCreateDTO.getFacultyName())
+                .orElseThrow(() -> new ResourceDoesNotExistException(courseCreateDTO.getId()));
+
+        courseToSave.setFaculty(faculty);
+
+//        if (courseRepository.findById(courseToSave.getId())) {
+//            throw new ResourceAlreadyExistsException(courseToSave.getId());
+//        } else
+            return courseRepository.save(courseToSave);
     }
 
     @Override
@@ -56,6 +60,10 @@ public class CourseDAO implements CourseService {
         if (optionalCourse.isPresent()) {
             return optionalCourse.get();
         } else throw new ResourceDoesNotExistException(courseCode);
+    }
+
+    public Optional<Faculty> findFacultyByName(String facultyName) {
+        return facultyRepository.findByFacultyName(facultyName);
     }
 
     @Override

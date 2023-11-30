@@ -1,8 +1,8 @@
 package com.example.project.web.controller;
 
-import com.example.project.model.exception.ResourceAlreadyExistsException;
-import com.example.project.model.exception.ResourceDoesNotExistException;
-import com.example.project.model.domain.Professor;
+import com.example.project.domain.exception.ResourceAlreadyExistsException;
+import com.example.project.domain.exception.ResourceDoesNotExistException;
+import com.example.project.domain.model.Professor;
 import com.example.project.service.users.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

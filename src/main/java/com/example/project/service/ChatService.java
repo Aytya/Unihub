@@ -1,6 +1,6 @@
 package com.example.project.service;
 
-import com.example.project.model.chat.ChatMessage;
+import com.example.project.domain.exception.ChatMessage;
 import com.example.project.repository.ChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

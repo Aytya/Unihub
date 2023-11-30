@@ -1,7 +1,7 @@
 package com.example.project.web.mapper;
 
 
-import com.example.project.model.domain.Course;
+import com.example.project.domain.model.Course;
 import com.example.project.web.dto.CourseCreateDTO;
 import org.mapstruct.Mapper;
 

@@ -1,6 +1,6 @@
 package com.example.project.repository;
 
-import com.example.project.model.attendance.Attendance;
+import com.example.project.domain.model.Attendance;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

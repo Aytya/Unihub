@@ -1,13 +1,12 @@
 package com.example.project.service;
 
-import com.example.project.model.attendance.Attendance;
+import com.example.project.domain.model.Attendance;
 import com.example.project.repository.AttendanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

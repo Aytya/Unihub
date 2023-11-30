@@ -1,6 +1,6 @@
 package com.example.project.repository;
 
-import com.example.project.model.domain.Professor;
+import com.example.project.domain.model.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

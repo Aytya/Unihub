@@ -1,9 +1,9 @@
 package com.example.project.service.impl;
 
-import com.example.project.model.domain.UserImage;
-import com.example.project.model.exception.ResourceDoesNotExistException;
-import com.example.project.model.role.Role;
-import com.example.project.model.domain.User;
+import com.example.project.domain.model.UserImage;
+import com.example.project.domain.exception.ResourceDoesNotExistException;
+import com.example.project.domain.role.Role;
+import com.example.project.domain.model.User;
 import com.example.project.repository.UserRepository;
 import com.example.project.service.users.ImageService;
 import com.example.project.service.users.StudentService;

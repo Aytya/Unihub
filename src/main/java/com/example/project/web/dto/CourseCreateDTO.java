@@ -12,5 +12,10 @@ public class CourseCreateDTO {
     private String courseCreditHour;
     private String preRequisite;
     private String semester;
-    private Long faculty_id;
+
+    private String facultyName;
+    private String professorName;
+
+    private String seminarTime;
+    private String lectureTime;
 }

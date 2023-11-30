@@ -1,6 +1,6 @@
 package com.example.project.web.token;
 
-import com.example.project.model.domain.User;
+import com.example.project.domain.model.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

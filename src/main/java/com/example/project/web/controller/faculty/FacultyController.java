@@ -1,8 +1,8 @@
 package com.example.project.web.controller.faculty;
 
-import com.example.project.model.domain.Faculty;
-import com.example.project.model.exception.ResourceAlreadyExistsException;
-import com.example.project.model.exception.ResourceDoesNotExistException;
+import com.example.project.domain.model.Faculty;
+import com.example.project.domain.exception.ResourceAlreadyExistsException;
+import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.service.users.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/faculty")
@@ -51,7 +52,7 @@ public class FacultyController {
     @PreAuthorize("hasAuthority('admin:update')")
     public ResponseEntity<Faculty> updateFaculty(@RequestBody Faculty faculty, @PathVariable Long id) {
         try {
-            Faculty updateFaculty = facultyService.update(faculty, id);
+            Faculty updateFaculty = facultyService.update(faculty,id);
             return ResponseEntity.ok().body(updateFaculty);
         } catch (ResourceDoesNotExistException e) {
             return ResponseEntity.notFound().build();

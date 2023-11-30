@@ -1,11 +1,10 @@
 package com.example.project.web.controller.faculty;
 
-import com.example.project.model.exception.ResourceAlreadyExistsException;
-import com.example.project.model.exception.ResourceDoesNotExistException;
-import com.example.project.model.domain.Course;
+import com.example.project.domain.exception.ResourceAlreadyExistsException;
+import com.example.project.domain.exception.ResourceDoesNotExistException;
+import com.example.project.domain.model.Course;
 import com.example.project.service.CourseService;
 import com.example.project.web.dto.CourseCreateDTO;
-import com.example.project.web.mapper.CourseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ import java.util.List;
 //@CrossOrigin("http://127.0.0.1:4200")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/v1")
+@RequestMapping(value = "/api/v1/course")
 public class CourseController {
 
     @Autowired
@@ -26,7 +25,7 @@ public class CourseController {
 
 
 
-    @PostMapping(value = "/admin/course/new")
+    @PostMapping(value = "/new")
     @PreAuthorize("hasAuthority('admin:create')")
     public ResponseEntity<Course> insertCourse(@RequestBody CourseCreateDTO courseCreateDTO) throws ResourceAlreadyExistsException {
         try {
@@ -39,7 +38,7 @@ public class CourseController {
         }
     }
 
-    @GetMapping(value = "course/{code}")
+    @GetMapping(value = "/{code}")
     public ResponseEntity<Course> getCourse(@PathVariable Long code) throws ResourceDoesNotExistException {
         try {
             Course course = courseService.getCourseById(code);
@@ -49,14 +48,14 @@ public class CourseController {
         }
     }
 
-    @GetMapping(value = "/courses")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<Course>> getCourse() {
         return ResponseEntity.ok().body(courseService.getAllCourses());
     }
 
-    @PutMapping(value = "u")
+    @PutMapping(value = "/update/{code}")
     @PreAuthorize("hasAuthority('admin:update')")
-    public ResponseEntity<Course> updateCourse(@RequestBody Long code, @RequestBody Course course) {
+    public ResponseEntity<Course> updateCourse(@RequestBody @PathVariable Long code, @RequestBody Course course) {
         try {
             Course updateCourse = courseService.updateCourse(code, course);
             return ResponseEntity.ok().body(updateCourse);
@@ -65,7 +64,7 @@ public class CourseController {
         }
     }
 
-    @DeleteMapping(value = "admin/{code}")
+    @DeleteMapping(value = "/{code}")
     @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<Boolean> deleteCourse(@PathVariable Long code) {
         try {

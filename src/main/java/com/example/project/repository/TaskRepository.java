@@ -1,6 +1,6 @@
 package com.example.project.repository;
 
-import com.example.project.model.domain.Task;
+import com.example.project.domain.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

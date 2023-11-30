@@ -1,6 +1,6 @@
 package com.example.project.web.dto.auth;
 
-import com.example.project.model.role.Role;
+import com.example.project.domain.role.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

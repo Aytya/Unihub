@@ -1,9 +1,8 @@
 package com.example.project.service.users;
 
-import com.example.project.model.domain.UserImage;
-import com.example.project.model.exception.ResourceDoesNotExistException;
-import com.example.project.model.domain.User;
-import com.example.project.web.dto.UserDto;
+import com.example.project.domain.model.UserImage;
+import com.example.project.domain.exception.ResourceDoesNotExistException;
+import com.example.project.domain.model.User;
 
 import java.util.List;
 

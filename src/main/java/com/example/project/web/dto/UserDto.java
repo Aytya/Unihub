@@ -1,14 +1,10 @@
 package com.example.project.web.dto;
 
-import com.example.project.model.domain.Faculty;
-import com.example.project.model.domain.Professor;
-import com.example.project.model.role.Role;
-import com.example.project.web.token.Token;
-import jakarta.persistence.*;
+import com.example.project.domain.role.Role;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 public class UserDto {
@@ -19,7 +15,7 @@ public class UserDto {
     private String email;//username
     private List<String> images;
     private Role role;
-    public String department;
+    public String department;//faculty-name
     public String program;
     public String yearOfEnrollment;
     public String yearOfSubmission;
@@ -29,7 +25,6 @@ public class UserDto {
     public String maillingAddress;
     public String phone;
     public String nationality;
-//    private Set<Role> roles;
-//    private Faculty faculty;
-//    private List<Professor> professor;
+    private List<ProfessorDto> professor;
+    private List<CourseCreateDTO> courses;
 }

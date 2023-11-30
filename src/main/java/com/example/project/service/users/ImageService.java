@@ -1,6 +1,6 @@
 package com.example.project.service.users;
 
-import com.example.project.model.domain.UserImage;
+import com.example.project.domain.model.UserImage;
 
 
 public interface ImageService {

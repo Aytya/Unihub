@@ -1,13 +1,12 @@
 package com.example.project.web.controller;
 
-import com.example.project.model.exception.*;
+import com.example.project.domain.exception.*;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.AuthenticationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
