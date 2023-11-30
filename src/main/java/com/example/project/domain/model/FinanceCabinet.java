@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.sql.Date;
+import java.time.LocalDateTime;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +19,8 @@ public class FinanceCabinet {
     private String type;//retake or fx or just student semester's fee
     private Long totalAmount;//total
     private Long submitAmount;
-    private Date date;
+    private LocalDateTime date;
 
     @OneToOne
-    public User studentId;
+    public User user;
 }

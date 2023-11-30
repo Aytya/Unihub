@@ -37,6 +37,6 @@ public class Course {
     private Faculty faculty;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "students_group", nullable = false)
+    @JoinColumn(name = "students_group", nullable = true)
     private List<User> studentList;
 }

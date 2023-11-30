@@ -30,7 +30,7 @@ public class User implements UserDetails {
     private String password;
     private String passwordConfirmation;
     @Column(name = "image")
-    @CollectionTable(name = "students_images")
+    @CollectionTable(name = "students_Simages")
     @ElementCollection
     private List<String> images;
 
