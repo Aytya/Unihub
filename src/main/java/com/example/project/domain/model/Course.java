@@ -36,7 +36,7 @@ public class Course {
     @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "students_group", nullable = false)
-    private List<User> studentList;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "students_group", nullable = false)
+//    private List<User> studentList;
 }

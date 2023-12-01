@@ -1,9 +1,7 @@
 package com.example.project.web.controller;
 
-import com.example.project.web.dto.UserImageDto;
 import com.example.project.web.dto.auth.AuthenticationResponse;
 import com.example.project.web.dto.auth.StudentRequest;
-import com.example.project.web.mapper.UserImageMapper;
 import com.example.project.domain.model.UserImage;
 import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.domain.model.User;
@@ -11,9 +9,10 @@ import com.example.project.web.security.auth.AuthenticationService;
 import com.example.project.service.users.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
@@ -21,19 +20,16 @@ import java.util.List;
 
 @CrossOrigin("http://127.0.0.1:4200")
 @RestController
-@RequestMapping("/api/v1/admin")
+@RequestMapping("/api/v1/student")
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
     @Autowired
     private StudentService studentService;
 
     @Autowired
-    private UserImageMapper userImageMapper;
-
-    @Autowired
     private AuthenticationService authenticationService;
 
-    @GetMapping("/students/{id}")
+    @GetMapping("/{id}")
 //    @PreAuthorize("hasAuthority('admin:read')")
     public ResponseEntity<User> getStudentById(@PathVariable Long id) {
         try {
@@ -46,25 +42,25 @@ public class AdminController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("/students/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String editStudentForm(@PathVariable Long id, Model model) throws ResourceDoesNotExistException {
         model.addAttribute("student", studentService.getStudentById(id));
         return "edit_student";
     }
 
-    @PostMapping("/student/new")
+    @PostMapping("/new")
     @PreAuthorize("hasAuthority('admin:create')")
     public ResponseEntity<AuthenticationResponse> insertStudent(@RequestBody StudentRequest student) {
         return ResponseEntity.ok(authenticationService.registrationStudent(student));
     }
 
-    @PostMapping("student/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<User> updateStudent(@PathVariable Long id,
                                 @ModelAttribute("student") User student) throws ResourceDoesNotExistException {
         return ResponseEntity.ok(studentService.updateStudent(student, id));
     }
 
-    @GetMapping(value = "student/all")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<User>> getStudent() {
         return ResponseEntity.ok().body(studentService.getAllStudents());
     }
@@ -74,7 +70,7 @@ public class AdminController {
         return "PUT:: admin controller";
     }
 
-    @DeleteMapping(value = "student/{id}")
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable Long id) throws ResourceDoesNotExistException {
         studentService.deleteStudentById(id);
     }
@@ -83,12 +79,11 @@ public class AdminController {
         return "Working!";
     }
 
-    @PostMapping("student/{id}/image")
-    @Operation(summary = "Upload image to task")
+    @PostMapping(value = "/{id}/image",consumes = MediaType.MULTIPART_FORM_DATA_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('admin:create')")
-    public void uploadImage(@PathVariable Long id, @Validated @ModelAttribute UserImageDto userImage) throws ResourceDoesNotExistException {
-            UserImage image = userImageMapper.toEntity(userImage);
-            studentService.uploadImage(id,image);
+    public ResponseEntity<String> uploadImage(@PathVariable Long id, UserImage userImage) throws ResourceDoesNotExistException {
+        studentService.uploadImage(id,userImage);
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
 }

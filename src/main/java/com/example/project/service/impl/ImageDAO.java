@@ -1,5 +1,6 @@
 package com.example.project.service.impl;
 
+import com.example.project.domain.model.User;
 import com.example.project.domain.model.UserImage;
 import com.example.project.domain.exception.ImageUploadException;
 import com.example.project.service.users.ImageService;
@@ -21,25 +22,26 @@ public class ImageDAO implements ImageService {
     private final MinioClient minioClient;
 
     @Override
-    public String upload(UserImage userImage) {
+    public String upload(final UserImage image) {
         try {
             createBucket();
-        }catch (Exception e) {
-            throw new ImageUploadException("Image upload failed" + e.getMessage());
+        } catch (Exception e) {
+            throw new ImageUploadException("Image upload failed: "
+                    + e.getMessage());
         }
-        MultipartFile file = userImage.getFile();
+        MultipartFile file = image.getFile();
         if (file.isEmpty() || file.getOriginalFilename() == null) {
-            throw new ImageUploadException("Image upload failed.");
+            throw new ImageUploadException("Image must have name.");
         }
         String fileName = generateFileName(file);
         InputStream inputStream;
         try {
             inputStream = file.getInputStream();
-        }catch (Exception e) {
-            throw new ImageUploadException("Image upload failed" + e.getMessage());
-
+        } catch (Exception e) {
+            throw new ImageUploadException("Image upload failed: "
+                    + e.getMessage());
         }
-        saveImage(inputStream,fileName);
+        saveImage(inputStream, fileName);
         return fileName;
     }
 

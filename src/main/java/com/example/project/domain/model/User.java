@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -29,6 +30,7 @@ public class User implements UserDetails {
     private String email;//username
     private String password;
     private String passwordConfirmation;
+
     @Column(name = "image")
     @CollectionTable(name = "students_images")
     @ElementCollection
@@ -53,6 +55,7 @@ public class User implements UserDetails {
     public String phone;
     public String nationality;
 
+
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "users_roles")
@@ -70,7 +73,6 @@ public class User implements UserDetails {
     @OneToMany
     @CollectionTable(name = "users_professors")
     private List<Professor> professor;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return role.getAuthorities();

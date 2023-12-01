@@ -3,6 +3,7 @@ package com.example.project.service.users;
 import com.example.project.domain.model.UserImage;
 import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.domain.model.User;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
