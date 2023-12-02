@@ -36,8 +36,8 @@ public class ApplicationConfig {
     @Bean
     public MinioClient minioClient() {
         return MinioClient.builder()
-                .endpoint("https://play.min.io")
-                .credentials("Q3AM3UQ867SPQQA43P2F", "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG")
+                .endpoint("https://play.min.io:9443")
+                .credentials("minioadmin", "minioadminm")
                 .build();
     }
 

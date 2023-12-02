@@ -30,6 +30,7 @@
         <redis.version>3.1.5</redis.version>
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
         <jakarta.validation.version>3.0.2</jakarta.validation.version>
+        <junit.jupiter.version>5.10.0</junit.jupiter.version>
     </properties>
 
 
@@ -83,6 +84,20 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

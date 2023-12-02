@@ -9,11 +9,16 @@ import com.example.project.service.users.ImageService;
 import com.example.project.service.users.StudentService;
 import com.example.project.web.mapper.UserMapper;
 import jakarta.transaction.Transactional;
+import jdk.jshell.spi.ExecutionControl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -22,8 +27,8 @@ public class StudentDAO implements StudentService {
 
     @Autowired
     private UserRepository userRepository;
+
     private final ImageService imageService;
-    private final UserMapper userMapper;
     @Override
     public List<User> getAllStudents() {
         List<User> studentList = new ArrayList<>();
@@ -89,13 +94,10 @@ public class StudentDAO implements StudentService {
         return student;
     }
 
-    @Override
-    @Transactional
-    @CacheEvict
-    public void uploadImage(Long id, UserImage image) throws ResourceDoesNotExistException {
-        User user = getStudentById(id);
+    @PostMapping("/{id}/image")
+    public void uploadImage(final Long id, final UserImage image) {
         String fileName = imageService.upload(image);
-        user.getImages().add(fileName);
-        userRepository.save(user);
+        userRepository.addImage(id, fileName);
     }
+
 }
