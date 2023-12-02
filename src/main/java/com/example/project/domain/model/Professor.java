@@ -1,5 +1,7 @@
 package com.example.project.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,14 +25,16 @@ public class Professor implements Serializable {
 
     private String name;
     private String qualification;
-    private String dean;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "courses")
+    @JsonManagedReference
     private List<Course> courseList;
+
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<User> studentList;
-    @ManyToOne
-    @JoinColumn(name = "faculty_id")
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private Faculty faculty;
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
@@ -18,10 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByEmail(@Param("email") String email);
 
     @Modifying
-    @Query(value = """
-            INSERT INTO tasks_images (task_id, image)
-            VALUES (:id, :fileName)
-            """, nativeQuery = true)
+    @Query(value = "INSERT INTO users_images (user_id, image) VALUES (:id, :fileName)", nativeQuery = true)
     void addImage(@Param("id") Long id, @Param("fileName") String fileName);
 
 }

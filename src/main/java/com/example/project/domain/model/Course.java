@@ -1,5 +1,7 @@
 package com.example.project.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,15 +30,15 @@ public class Course {
     private String seminarTime;
     private String lectureTime;
 
+    private Long group_id;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "professor", nullable = false)
+    @JsonBackReference
     private Professor professor;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "faculty_id", nullable = false)
+    @JsonBackReference
     private Faculty faculty;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "students_group", nullable = true)
-    private List<User> studentList;
 }

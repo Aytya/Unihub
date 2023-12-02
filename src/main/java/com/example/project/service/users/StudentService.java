@@ -1,5 +1,6 @@
 package com.example.project.service.users;
 
+import com.example.project.domain.model.Professor;
 import com.example.project.domain.model.UserImage;
 import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.domain.model.User;
@@ -16,4 +17,5 @@ public interface StudentService {
     void deleteStudentById(Long id) throws ResourceDoesNotExistException;
     User create(User student);
     void uploadImage(Long id, UserImage image) throws ResourceDoesNotExistException;
+    List<Professor> findAllProfessorsOfUser(String userEmail);
 }

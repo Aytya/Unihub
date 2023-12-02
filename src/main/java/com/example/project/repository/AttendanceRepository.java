@@ -13,20 +13,20 @@ import java.util.Optional;
 
 
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
-    @Query("SELECT a FROM attendance a WHERE a._group = :group")
+    @Query("SELECT a FROM Attendance a WHERE a._group = :group")
     List<Attendance> findAllByGroup(@Param("group") String group);
 
-    @Query("SELECT a FROM attendance a WHERE a.startTime = :startTime")
+    @Query("SELECT a FROM Attendance a WHERE a.startTime = :startTime")
     Optional<Attendance> findByStartTime(@Param("startTime") LocalDateTime startTime);
 
     @Transactional
     @Modifying
-    @Query("UPDATE attendance a SET a.unlock = :unlock WHERE a.startTime = :startTime")
+    @Query("UPDATE Attendance a SET a.unlock = :unlock WHERE a.startTime = :startTime")
     int updateUnlockByStartTime(@Param("startTime") LocalDateTime startTime, @Param("unlock") Boolean unlock);
 
     @Transactional
     @Modifying
-    @Query("UPDATE attendance a SET a.unlock = :unlock, a.duration = :duration WHERE a.startTime = :startTime")
+    @Query("UPDATE Attendance a SET a.unlock = :unlock, a.duration = :duration WHERE a.startTime = :startTime")
     int updateUnlockAndDurationByStartTime(
             @Param("startTime") LocalDateTime startTime,
             @Param("unlock") Boolean unlock,

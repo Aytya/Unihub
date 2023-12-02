@@ -3,6 +3,7 @@ package com.example.project.domain.model;
 
 import com.example.project.domain.role.Role;
 import com.example.project.web.token.Token;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,9 +33,16 @@ public class User implements UserDetails {
     private String passwordConfirmation;
 
     @Column(name = "image")
-    @CollectionTable(name = "students_Simages")
-    @ElementCollection
+    @CollectionTable(name = "users_images")
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> images;
+
+    @ManyToOne
+//    @JoinColumn(name="user_id", nullable=false)
+    private Group _group;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Task> tasks;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -61,10 +69,6 @@ public class User implements UserDetails {
     @CollectionTable(name = "users_roles")
     @Enumerated(value = EnumType.STRING)
     private Set<Role> roles;
-
-    @ManyToOne
-    @JoinColumn(name = "faculty_id")
-    private Faculty faculty;
 
     @OneToMany(mappedBy = "user")
     @CollectionTable(name = "users_token")

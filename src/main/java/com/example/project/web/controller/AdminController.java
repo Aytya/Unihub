@@ -1,5 +1,6 @@
 package com.example.project.web.controller;
 
+import com.example.project.domain.model.Professor;
 import com.example.project.web.dto.auth.AuthenticationResponse;
 import com.example.project.web.dto.auth.StudentRequest;
 import com.example.project.domain.model.UserImage;
@@ -22,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/student")
 @PreAuthorize("hasRole('ADMIN')")
+
 public class AdminController {
     @Autowired
     private StudentService studentService;
@@ -58,6 +60,16 @@ public class AdminController {
     public ResponseEntity<User> updateStudent(@PathVariable Long id,
                                 @ModelAttribute("student") User student) throws ResourceDoesNotExistException {
         return ResponseEntity.ok(studentService.updateStudent(student, id));
+    }
+    @GetMapping("/{email}/professors")
+    public ResponseEntity<List<Professor>> getAllProfessorsOfUser(@PathVariable String email) {
+        List<Professor> professors = studentService.findAllProfessorsOfUser(email);
+
+        if (professors != null) {
+            return ResponseEntity.ok(professors);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping(value = "/all")

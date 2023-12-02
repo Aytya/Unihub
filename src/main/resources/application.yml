@@ -5,27 +5,30 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
   datasource:
-    url: jdbc:postgresql://localhost:5433/jwt_security
+    url: jdbc:postgresql://localhost:5432/jwt_security
     username: postgres
-    password: Mazayka2003
+    password: 7212Hey)
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
         format_sql: false
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  liquibase:
-    enabled: false
-    default-schema: jwt_security
-    change-log: classpath:liquibase/db.changelog.yaml
   docker:
     compose:
       enabled: false
       file: ./docker-compose.yml
+#  flyway:
+#    baseline-on-migrate: true
+#    enabled: true
+#    user: postgres
+#    password: 7212Hey)
+#    baseline-description: "init"
+#    baseline-version: 0
 
 application:
   security:

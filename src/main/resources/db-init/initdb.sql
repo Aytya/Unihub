@@ -1,1 +1,1 @@
-CREATE SCHEMA IF NOT EXISTS jwt_security;
+CREATE DATABASE IF NOT EXISTS jwt_security;

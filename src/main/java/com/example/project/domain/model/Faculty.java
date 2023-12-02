@@ -27,15 +27,15 @@ public class Faculty implements Serializable {
     @Column(unique = true,length = 1024)
     private Long phoneNumber;
 
-    @OneToMany(mappedBy = "faculty", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
     //@JoinColumn(name = "faculty", referencedColumnName = "id",nullable = false)
     private List<Course> courseList;
 
-    @OneToMany(mappedBy = "faculty", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
     @CollectionTable(name = "professors")
     private List<Professor> professorList;
 
-    @OneToMany(mappedBy = "faculty", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
     @CollectionTable(name = "students")
     private List<User> studentList;
 }
