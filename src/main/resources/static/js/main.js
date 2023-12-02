@@ -17,8 +17,8 @@ var colors = [
 ];
 
 function connect(event) {
-    username = document.querySelector('#name').value.trim();
-
+    const usernamee = document.querySelector('#name').value.trim();
+    fetchMessages(usernamee);
     if(username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
@@ -30,18 +30,29 @@ function connect(event) {
     }
     event.preventDefault();
 }
+function fetchMessages(userEmail) {
+    fetch(`/api/user/${userEmail}`)
+        .then(response => response.json())
+        .then(data => displayMessage(data))
 
 
+}
+function displayMessage(data){
+    console.log(data);
+    username = data.firstName +" "+ data.lastName;
+    console.log(username)
+}
+function displayError(){
+
+    const h3 = document.getElementById('warn');
+    if(h3)
+        h3.textContent = "No such user found in DB";
+}
 function onConnected() {
-    // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
-
-    // Tell your username to the server
-    stompClient.send("/app/chat.addUser",
-        {},
-        JSON.stringify({sender: username, type: 'JOIN'})
+    stompClient.send("/app/chat.addUser", {},
+        JSON.stringify({sender:username, type:'JOIN'})
     )
-
     connectingElement.classList.add('hidden');
 }
 
@@ -92,7 +103,7 @@ function onMessageReceived(payload) {
         var usernameText = document.createTextNode(message.sender);
         var usernameDate = document.createTextNode(message.localDateTime)
         usernameElement.appendChild(usernameText);
-        usernameElement.appendChild(usernameDate)
+        usernameElement.appendChild(usernameDate);
         messageElement.appendChild(usernameElement);
     }
 
