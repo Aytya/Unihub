@@ -5,19 +5,26 @@ services:
     image: 'final:latest'
     build:
       context: .
+    container_name: app
+    ports:
+      - "8081:8081"
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/jwt_security
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=7212Hey)
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db:5432/unihub"
+      SPRING_DATASOURCE_USERNAME: "postgres"
+      SPRING_DATASOURCE_PASSWORD: "7212Hey)"
 
   db:
     image: 'postgres:13.1-alpine'
     container_name: db
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=7212Hey)
-    volumes:
-      - ./src/main/resources/db-init:/docker-entrypoint-initdb.d
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "7212Hey)"
+      PGDATA : "/opt/homebrew/var/postgresql@14"
+      POSTGRES_DB: "unihub"
+    ports:
+      - "5432:5432"
+volumes:
+  db:
+    driver: local
