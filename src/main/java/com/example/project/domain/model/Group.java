@@ -14,16 +14,10 @@ import java.util.List;
 @Entity
 @Table(name = "_group")
 public class Group {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(mappedBy = "_group")
-    @JsonManagedReference
     private List<User> students;
-
-    @OneToOne(mappedBy = "_group", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Attendance attendance;
 }

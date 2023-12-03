@@ -1,6 +1,8 @@
 package com.example.project.web.controller;
 
+import com.example.project.domain.model.Group;
 import com.example.project.domain.model.Professor;
+import com.example.project.service.GroupService;
 import com.example.project.web.dto.auth.AuthenticationResponse;
 import com.example.project.web.dto.auth.StudentRequest;
 import com.example.project.domain.model.UserImage;
@@ -25,9 +27,12 @@ import java.util.List;
 @PreAuthorize("hasRole('ADMIN')")
 
 public class AdminController {
+
+
     @Autowired
     private StudentService studentService;
-
+    @Autowired
+    private GroupService groupService;
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -54,6 +59,12 @@ public class AdminController {
     @PreAuthorize("hasAuthority('admin:create')")
     public ResponseEntity<AuthenticationResponse> insertStudent(@RequestBody StudentRequest student) {
         return ResponseEntity.ok(authenticationService.registrationStudent(student));
+    }
+    @PostMapping("/group")
+    @PreAuthorize("hasAuthority('admin:create')")
+    public ResponseEntity<Group> createGroup(@RequestParam Group group){
+        this.groupService.createGroup(group);
+        return new ResponseEntity<>(group, HttpStatus.OK);
     }
 
     @PostMapping("/{id}")

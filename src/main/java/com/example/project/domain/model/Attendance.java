@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 public class Attendance {
 
     @Id
-    @Column(name = "group_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -29,7 +28,6 @@ public class Attendance {
     private LocalDateTime startTime;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "group_id")
     private Group _group;
 }

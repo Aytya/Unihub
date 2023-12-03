@@ -1,3 +1,4 @@
+
 spring:
   kafka:
     bootstrap-servers: localhost:9092
@@ -7,9 +8,9 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   datasource:
-    url: jdbc:postgresql://localhost:5432/jwt_security
+    url: jdbc:postgresql://localhost:5433/jwt_security
     username: postgres
-    password: 7212Hey)
+    password: Mazayka2003
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -46,3 +47,5 @@ springdoc:
   swagger-ui:
     path: /swagger-ui-custom.html
     operations-sorter: method
+server:
+  port: 8081
