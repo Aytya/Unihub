@@ -1,4 +1,18 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/unihub
+    username: postgres
+    password: 7212Hey)
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
@@ -6,24 +20,10 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-  datasource:
-    url: jdbc:postgresql://localhost:5432/jwt_security
-    username: postgres
-    password: 7212Hey)
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: false
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
   docker:
     compose:
       enabled: false
-      file: ./docker-compose.yml
+      file: src/main/docker/docker-compose.yaml
 #  flyway:
 #    baseline-on-migrate: true
 #    enabled: true
@@ -46,3 +46,6 @@ springdoc:
   swagger-ui:
     path: /swagger-ui-custom.html
     operations-sorter: method
+
+#server:
+#  port: 8090
