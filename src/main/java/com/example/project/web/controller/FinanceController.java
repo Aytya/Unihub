@@ -4,6 +4,7 @@ import com.example.project.domain.model.User;
 import com.example.project.service.FinanceService;
 import com.example.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
@@ -14,7 +15,12 @@ public class FinanceController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/all")
+    public List<FinanceCabinet> getAllFinance(){
+        return this.financeService.getAllFinance();
+    }
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('admin:create')")
     public FinanceCabinet createFinanceCabinet(
             @RequestParam String userEmail,
             @RequestParam Long semester,
@@ -55,6 +61,7 @@ public class FinanceController {
     }
 
     @PostMapping("/setDefaultSemester")
+    @PreAuthorize("hasAuthority('admin:create')")
     public void setDefaultSemester(@RequestParam String userEmail) {
 
         User user = userService.findUserByEmail(userEmail);
@@ -63,6 +70,7 @@ public class FinanceController {
     }
 
     @PostMapping("/validateAndSetType")
+    @PreAuthorize("hasAuthority('admin:create')")
     public void validateAndSetType(
             @RequestParam String userEmail,
             @RequestParam String newType

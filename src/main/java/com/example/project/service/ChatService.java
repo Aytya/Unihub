@@ -17,11 +17,12 @@ public class ChatService {
     public List<ChatMessage> getAllMessages(){
         return this.chatRepository.findAll();
     }
-    public void saveChatMessage(ChatMessage chatMessage){
+    public ChatMessage saveChatMessage(ChatMessage chatMessage){
         LocalDateTime localDateTime = LocalDateTime.now();
         String dateTimeNow = getFormattedCreationTime(localDateTime);
         chatMessage.setLocalDateTime(dateTimeNow);
         this.chatRepository.save(chatMessage);
+        return chatMessage;
     }
     public String getFormattedCreationTime(LocalDateTime creationTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
