@@ -39,14 +39,11 @@ function fetchMessages(userEmail) {
 }
 function displayMessage(data){
     console.log(data);
-    username = data.firstName +" "+ data.lastName;
+    username = data.firstName;
     console.log(username)
 }
 function displayError(){
-
-    const h3 = document.getElementById('warn');
-    if(h3)
-        h3.textContent = "No such user found in DB";
+    username = ""
 }
 function onConnected() {
     stompClient.subscribe('/topic/public', onMessageReceived);
@@ -71,7 +68,15 @@ function sendMessage(event) {
             content: messageInput.value,
             type: 'CHAT'
         };
+        console.log(chatMessage)
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        // fetch('/api/messages/sendMessage', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(chatMessage),
+        // });
         messageInput.value = '';
     }
     event.preventDefault();

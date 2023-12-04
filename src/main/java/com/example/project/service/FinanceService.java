@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class FinanceService {
@@ -44,10 +45,13 @@ public class FinanceService {
         FinanceCabinet financeCabinet = getFinanceCabinetByUser(user);
         return financeCabinet.getTotalAmount() - financeCabinet.getSubmitAmount();
     }
-
+    public List<FinanceCabinet> getAllFinance(){
+        List<FinanceCabinet> financeCabinet = financeRepository.findAll();
+        return financeCabinet;
+    }
     public boolean isPaymentComplete(User user) {
         FinanceCabinet financeCabinet = getFinanceCabinetByUser(user);
-        return financeCabinet.getTotalAmount().equals(financeCabinet.getSubmitAmount());
+        return financeCabinet.getTotalAmount() <= (financeCabinet.getSubmitAmount());
     }
 
     public void updatePayment(User user, Long amount) {

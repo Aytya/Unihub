@@ -26,8 +26,5 @@ public class Attendance {
     private Long lastUpdateTime;
     @Nullable
     private LocalDateTime startTime;
-
-    @OneToOne
-    @JoinColumn(name = "group_id")
-    private Group _group;
+    private String _group;
 }
