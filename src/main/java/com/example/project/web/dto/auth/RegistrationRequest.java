@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistrationRequest {
+public class RegistrationRequest implements RegistrationRequestBase{
 
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
     private Role role;

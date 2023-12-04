@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Task implements Serializable {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

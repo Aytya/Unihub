@@ -32,10 +32,13 @@ public class User implements UserDetails {
     private String password;
     private String passwordConfirmation;
 
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @CollectionTable(name = "user_image", joinColumns = @JoinColumn(name = "_user_id"))
+//    @Column(name = "fileName")
+//    private List<String> images;
+
     @Column(name = "image")
-    @CollectionTable(name = "users_images")
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> images;
+    private String image;
 
     @ManyToOne
 //    @JoinColumn(name="user_id", nullable=false)
@@ -64,11 +67,10 @@ public class User implements UserDetails {
     public String nationality;
 
 
-    @Column(name = "role")
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "users_roles")
-    @Enumerated(value = EnumType.STRING)
-    private Set<Role> roles;
+//    @Column(name = "role")
+//    @CollectionTable(name = "users_roles")
+//    @Enumerated(value = EnumType.STRING)
+//    private Set<Role> roles;
 
     @OneToMany(mappedBy = "user")
     @CollectionTable(name = "users_token")

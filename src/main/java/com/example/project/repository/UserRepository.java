@@ -2,6 +2,7 @@ package com.example.project.repository;
 
 import com.example.project.domain.model.User;
 import com.example.project.domain.model.UserImage;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
@@ -17,7 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByEmail(@Param("email") String email);
 
     @Modifying
-    @Query(value = "INSERT INTO users_images (user_id, image) VALUES (:id, :fileName)", nativeQuery = true)
-    void addImage(@Param("id") Long id, @Param("fileName") String fileName);
-
+    @Query("UPDATE User u SET u.image = :image WHERE u.id = :id")
+    void addImage(@Param("id") Long id, @Param("image") String image);
 }

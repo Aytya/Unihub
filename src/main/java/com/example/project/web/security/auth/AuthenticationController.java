@@ -1,5 +1,6 @@
 package com.example.project.web.security.auth;
 
+import com.example.project.domain.role.Role;
 import com.example.project.web.dto.auth.AuthenticationRequest;
 import com.example.project.web.dto.auth.AuthenticationResponse;
 import com.example.project.web.dto.auth.RegistrationRequest;
@@ -21,7 +22,7 @@ public class AuthenticationController {
 
     @PostMapping("/registration")
     public ResponseEntity<AuthenticationResponse> registration(@RequestBody RegistrationRequest registrationRequest){
-        return ResponseEntity.ok(authenticationService.registration(registrationRequest));
+        return ResponseEntity.ok(authenticationService.registration(registrationRequest, Role.ADMIN));
     }
 
     @PostMapping("/authentication")

@@ -1,14 +1,17 @@
 package com.example.project.web.controller;
 
 import com.example.project.domain.model.Professor;
+import com.example.project.domain.role.Role;
+import com.example.project.web.dto.UserDto;
 import com.example.project.web.dto.auth.AuthenticationResponse;
 import com.example.project.web.dto.auth.StudentRequest;
 import com.example.project.domain.model.UserImage;
 import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.domain.model.User;
+import com.example.project.web.mapper.UserMapper;
 import com.example.project.web.security.auth.AuthenticationService;
 import com.example.project.service.users.StudentService;
-import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,23 +26,25 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/student")
 @PreAuthorize("hasRole('ADMIN')")
-
+@RequiredArgsConstructor
 public class AdminController {
     @Autowired
     private StudentService studentService;
+
+    private final UserMapper userMapper;
 
     @Autowired
     private AuthenticationService authenticationService;
 
     @GetMapping("/{id}")
 //    @PreAuthorize("hasAuthority('admin:read')")
-    public ResponseEntity<User> getStudentById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getStudentById(@PathVariable Long id) {
         try {
             System.out.println("AdminController");
             User student = studentService.getStudentById(id);
-            System.out.println(student);
+            System.out.println(userMapper.toDto(student));
             System.out.println("AdminController 2");
-            return ResponseEntity.ok(student);
+            return ResponseEntity.ok(userMapper.toDto(student));
         } catch (ResourceDoesNotExistException e) {
             return ResponseEntity.notFound().build();
         }
@@ -53,13 +58,14 @@ public class AdminController {
     @PostMapping("/new")
     @PreAuthorize("hasAuthority('admin:create')")
     public ResponseEntity<AuthenticationResponse> insertStudent(@RequestBody StudentRequest student) {
-        return ResponseEntity.ok(authenticationService.registrationStudent(student));
+        return ResponseEntity.ok(authenticationService.registration(student, Role.USER));
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<User> updateStudent(@PathVariable Long id,
-                                @ModelAttribute("student") User student) throws ResourceDoesNotExistException {
-        return ResponseEntity.ok(studentService.updateStudent(student, id));
+    public ResponseEntity<UserDto> updateStudent(@PathVariable Long id,
+                                                 @ModelAttribute("student") User student) throws ResourceDoesNotExistException {
+        User user = studentService.updateStudent(student, id);
+        return ResponseEntity.ok(userMapper.toDto(user));
     }
     @GetMapping("/{email}/professors")
     public ResponseEntity<List<Professor>> getAllProfessorsOfUser(@PathVariable String email) {

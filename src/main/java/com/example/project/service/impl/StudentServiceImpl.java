@@ -1,5 +1,6 @@
 package com.example.project.service.impl;
 
+import com.example.project.domain.exception.ResourceAlreadyExistsException;
 import com.example.project.domain.model.Professor;
 import com.example.project.domain.model.UserImage;
 import com.example.project.domain.exception.ResourceDoesNotExistException;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -31,16 +33,15 @@ public class StudentServiceImpl implements StudentService {
         return studentList;
     }
 
-//    @Override
-//    public User saveStudent(User student) throws ResourceAlreadyExistsException {
-//
-//        Optional<User> optionalStudent = userRepository.findById(student.getId());
-//        if(optionalStudent.isPresent()) {
-//            throw new ResourceAlreadyExistsException(student.getId());
-//        } else {
-//            return userRepository.save(student);
-//        }
-//    }
+    public User saveStudent(User student) throws ResourceAlreadyExistsException {
+
+        Optional<User> optionalStudent = userRepository.findById(student.getId());
+        if(optionalStudent.isPresent()) {
+            throw new ResourceAlreadyExistsException(student.getId());
+        } else {
+            return userRepository.save(student);
+        }
+    }
 
     @Override
     public User getStudentById(Long id) throws ResourceDoesNotExistException {
@@ -95,14 +96,12 @@ public class StudentServiceImpl implements StudentService {
             );
         }
         Set<Role> roles = Set.of(Role.USER);
-        student.setRoles(roles);
         userRepository.save(student);
         return student;
     }
 
-    @PostMapping("/{id}/image")
     public void uploadImage(final Long id, final UserImage image) {
-        String fileName = imageService.upload(image);
+        String fileName = imageService.upload(image);//aya
         userRepository.addImage(id, fileName);
     }
 

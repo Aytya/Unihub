@@ -3,7 +3,10 @@ package com.example.project.service.impl;
 import com.example.project.domain.model.UserImage;
 import com.example.project.domain.exception.ImageUploadException;
 import com.example.project.service.users.ImageService;
-import io.minio.*;
+import io.minio.BucketExistsArgs;
+import io.minio.MakeBucketArgs;
+import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -19,14 +22,14 @@ import java.util.UUID;
 public class ImageServiceImpl implements ImageService {
 
     private final MinioClient minioClient;
+    private String bucketName = "please";
 
     @Override
     public String upload(final UserImage image) {
         try {
             createBucket();
         } catch (Exception e) {
-            throw new ImageUploadException("Image upload failed: "
-                    + e.getMessage());
+            throw new ImageUploadException("Image upload failed: " + e.getMessage());
         }
         MultipartFile file = image.getFile();
         if (file.isEmpty() || file.getOriginalFilename() == null) {
@@ -47,14 +50,8 @@ public class ImageServiceImpl implements ImageService {
     @SneakyThrows
     private void createBucket() {
         boolean found = minioClient.bucketExists(BucketExistsArgs.builder()
-                .bucket("asiatrip")
+                .bucket("images")
                 .build());
-
-//        if (!found) {
-//            minioClient.makeBucket(MakeBucketArgs.builder()
-//                            .bucket(minioProperties.getBucket())
-//                    .build());
-//        }
         if (!found) {
             minioClient.makeBucket(MakeBucketArgs.builder().bucket("images").build());
         } else {
@@ -76,7 +73,7 @@ public class ImageServiceImpl implements ImageService {
     private void saveImage(InputStream inputStream, String fileName) {
         minioClient.putObject(PutObjectArgs.builder()
                 .stream(inputStream,inputStream.available(),-1)
-                .bucket("images")
+                .bucket(bucketName)
                         .object(fileName)
                 .build());
     }

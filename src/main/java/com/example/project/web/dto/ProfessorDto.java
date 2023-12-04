@@ -15,5 +15,4 @@ public class ProfessorDto {
     private String name;
     private String qualification;
     private String facultyName;
-    private List<Course> courseList;
 }

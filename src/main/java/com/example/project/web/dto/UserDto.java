@@ -13,7 +13,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;//username
-    private List<String> images;
+    private String image;
     private Role role;
     public String department;//faculty-name
     public String program;

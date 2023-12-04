@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @Builder
 @Table(name = "professor")
-public class Professor implements Serializable {
+public class Professor {
 
     @Id
     @Column(name = "professors_id")

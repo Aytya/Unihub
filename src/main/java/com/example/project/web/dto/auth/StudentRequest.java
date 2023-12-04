@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentRequest {
+public class StudentRequest implements RegistrationRequestBase{
 
     private String firstName;
     private String lastName;
@@ -28,8 +28,5 @@ public class StudentRequest {
     public String permanentAddress;
     public String phone;
     public String nationality;
-
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private List<String> images;
 
 }

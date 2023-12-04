@@ -3,6 +3,7 @@ package com.example.project.web.security.config;
 import com.example.project.repository.UserRepository;
 import io.minio.MinioClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,13 @@ public class ApplicationConfig {
 
     private final UserRepository repository;
 
+    @Value("${minio.endpoint}")
+    private String endpoint;
+    @Value("${minio.access-key}")
+    private String accessKey;
+    @Value("${minio.secret-key}")
+    private String secretKey;
+
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
@@ -36,8 +44,8 @@ public class ApplicationConfig {
     @Bean
     public MinioClient minioClient() {
         return MinioClient.builder()
-                .endpoint("https://play.min.io:9443")
-                .credentials("minioadmin", "minioadminm")
+                .endpoint(endpoint)
+                .credentials(accessKey, secretKey)
                 .build();
     }
 
