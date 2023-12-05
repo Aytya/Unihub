@@ -1,8 +1,7 @@
-package com.example.project.domain.exception;
+package com.example.project.domain.model;
 
 import com.example.project.domain.role.MessageType;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,11 +12,11 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 
-@Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ChatMessage implements Serializable {
+@NoArgsConstructor
+@RedisHash("Message")
+public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
