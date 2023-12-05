@@ -70,13 +70,7 @@ function sendMessage(event) {
         };
         console.log(chatMessage)
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-        // fetch('/api/messages/sendMessage', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(chatMessage),
-        // });
+
         messageInput.value = '';
     }
     event.preventDefault();

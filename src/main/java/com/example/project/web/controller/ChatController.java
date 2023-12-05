@@ -33,14 +33,6 @@ public class ChatController {
         kafkaTemplate.send("topic", chatMessage);
         return chatMessage;
     }
-//    @PostMapping("/sendMessage")
-////    @SendTo("/topic/public")
-//    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) throws InterruptedException {
-//        System.out.println(chatMessage);
-//        ChatMessage chatMessage1 = this.chatService.saveChatMessage(chatMessage);
-//        kafkaTemplate.send("topic", chatMessage1);
-//        return chatMessage1;
-//    }
 
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")

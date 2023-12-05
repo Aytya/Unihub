@@ -25,12 +25,9 @@ spring:
       enabled: false
       file: src/main/docker/docker-compose.yaml
   flyway:
-    baseline-on-migrate: true
-    enabled: false
-    user: postgres
-    password: 7212Hey)
-    baseline-description: "init"
     baseline-version: 0
+    locations: db/migration
+    baseline-on-migrate: true
 
 application:
   security:
