@@ -22,7 +22,7 @@ public class AuthenticationController {
 
     @PostMapping("/registration")
     public ResponseEntity<AuthenticationResponse> registration(@RequestBody RegistrationRequest registrationRequest){
-        return ResponseEntity.ok(authenticationService.registration(registrationRequest, Role.ADMIN));
+        return ResponseEntity.ok(authenticationService.registration(registrationRequest));
     }
 
     @PostMapping("/authentication")

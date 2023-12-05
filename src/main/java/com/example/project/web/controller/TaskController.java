@@ -2,7 +2,7 @@ package com.example.project.web.controller;
 
 import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.domain.model.Task;
-import com.example.project.service.TaskService;
+import com.example.project.service.users.TaskService;
 import com.example.project.web.dto.TaskDto;
 import com.example.project.web.mapper.TaskMapper;
 import io.swagger.v3.oas.annotations.Operation;

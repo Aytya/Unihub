@@ -41,4 +41,6 @@ public class Course {
     @JoinColumn(name = "faculty_id", nullable = false)
     @JsonBackReference
     private Faculty faculty;
+
+
 }

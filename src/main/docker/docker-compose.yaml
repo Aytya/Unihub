@@ -1,66 +1,30 @@
-#version: '3'
-#
-#services:
-#  app:
-#    image: 'final:latest'
-#    build:
-#      context: .
-#    container_name: app
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - db
-#    environment:
-#      SPRING_DATASOURCE_URL: "jdbc:postgresql://db:5433/jwt_security"
-#      SPRING_DATASOURCE_USERNAME: "postgres"
-#      SPRING_DATASOURCE_PASSWORD: "Mazayka2003"
-#
-#  db:
-#    image: 'postgres:13.1-alpine'
-#    container_name: db
-#    environment:
-#      POSTGRES_USER: "postgres"
-#      POSTGRES_PASSWORD: "Mazayka2003"
-#      PGDATA : "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PostgreSQL 16"
-#      POSTGRES_DB: "jwt_security"
-#    ports:
-#      - "5432:5432"
-#volumes:
-#  db:
-#    driver: local
-version: "3.8"
+version: '3'
 
 services:
-  postgresdb:
-    image: postgres
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=Mazayka2003
-      - POSTGRES_DB=jwt_security
-    ports:
-      - 5433:5433
-    volumes:
-      - db:/var/lib/postgres
   app:
-    depends_on:
-      - postgresdb
-    build: ./
-    restart: on-failure
+    image: 'final:latest'
+    build:
+      context: .
+    container_name: app
     ports:
-      - 8080:8080
+      - "8080:8080"
+    depends_on:
+      - db
     environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:postgresql://postgresdb:5433/jwt_security",
-        "spring.datasource.username" : "postgres",
-        "spring.datasource.password" : "Mazayka2003",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
-      }'
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db:5432/unihub"
+      SPRING_DATASOURCE_USERNAME: "postgres"
+      SPRING_DATASOURCE_PASSWORD: "7212Hey)"
 
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "7212Hey)"
+      PGDATA : "/opt/homebrew/var/postgresql@14"
+      POSTGRES_DB: "unihub"
+    ports:
+      - "5432:5432"
 volumes:
   db:
+    driver: local

@@ -42,8 +42,8 @@ public class User implements UserDetails {
     private String image;
 
     @ManyToOne
-//    @JoinColumn(name="user_id", nullable=false)
-    private Group _group;
+    @JoinColumn(name="attendance_id")
+    private Attendance attendance;
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Task> tasks;
@@ -66,12 +66,6 @@ public class User implements UserDetails {
     @Column(unique = true)
     public String phone;
     public String nationality;
-
-
-//    @Column(name = "role")
-//    @CollectionTable(name = "users_roles")
-//    @Enumerated(value = EnumType.STRING)
-//    private Set<Role> roles;
 
     @OneToMany(mappedBy = "user")
     @CollectionTable(name = "users_token")

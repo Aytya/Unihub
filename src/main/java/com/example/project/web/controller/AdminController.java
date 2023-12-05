@@ -4,6 +4,7 @@ import com.example.project.domain.model.Professor;
 import com.example.project.domain.role.Role;
 import com.example.project.web.dto.UserDto;
 import com.example.project.web.dto.auth.AuthenticationResponse;
+import com.example.project.web.dto.auth.RegistrationRequest;
 import com.example.project.web.dto.auth.StudentRequest;
 import com.example.project.domain.model.UserImage;
 import com.example.project.domain.exception.ResourceDoesNotExistException;
@@ -58,7 +59,7 @@ public class AdminController {
     @PostMapping("/new")
     @PreAuthorize("hasAuthority('admin:create')")
     public ResponseEntity<AuthenticationResponse> insertStudent(@RequestBody StudentRequest student) {
-        return ResponseEntity.ok(authenticationService.registration(student, Role.USER));
+        return ResponseEntity.ok(authenticationService.registrationStudent(student));
     }
 
     @PostMapping("/{id}")

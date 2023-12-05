@@ -3,7 +3,7 @@ package com.example.project.web.controller.faculty;
 import com.example.project.domain.exception.ResourceAlreadyExistsException;
 import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.domain.model.Course;
-import com.example.project.service.CourseService;
+import com.example.project.service.users.CourseService;
 import com.example.project.web.dto.CourseCreateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

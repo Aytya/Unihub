@@ -1,7 +1,14 @@
 package com.example.project.service;
 
+import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.domain.model.Attendance;
+import com.example.project.domain.model.User;
 import com.example.project.repository.AttendanceRepository;
+import com.example.project.service.users.StudentService;
+import com.example.project.web.dto.StudentDto;
+import com.example.project.web.mapper.AttendanceMapper;
+import com.example.project.web.mapper.StudentMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -11,18 +18,49 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AttendanceService {
+
     @Autowired
     private AttendanceRepository attendanceRepository;
 
-    public void createAttendance(Attendance attendance){
-        this.attendanceRepository.save(attendance);
+    @Autowired
+    private final StudentMapper studentMapper;
+
+    @Autowired
+    private StudentService studentService;
+
+    public void createAttendance(Attendance attendance) throws ResourceDoesNotExistException {
+        List<StudentDto> studentList = attendance.getUserList();
+
+        for (StudentDto user : studentList) {
+            User fetchedUser = studentService.getStudentById(user.getId());
+
+            if (fetchedUser == null) {
+                throw new ResourceDoesNotExistException(user.getId());
+            }
+
+            StudentDto userIdAndName = new StudentDto();
+            userIdAndName.setId(fetchedUser.getId());
+            userIdAndName.setName(fetchedUser.getEmail());
+
+        }
+
+        attendanceRepository.save(attendance);
     }
 
-    public List<Attendance> getAllAttendancesForGroup(String group) {
-//        System.out.println(attendanceRepository.findAllByGroup(group));
-        return attendanceRepository.findAllByGroup(group);
+    public Attendance getAttendanceById(Long id) {
+        List<Attendance> attendances = attendanceRepository.findAll();
+        for(Attendance attendance: attendances){
+            for(StudentDto studentDto: attendance.getUserList()){
+                if(studentDto.getId() == id){
+                    return attendance;
+                }
+            }
+        }
+        return null;
     }
+
     public Optional<Attendance> getTheAttendance(LocalDateTime localDateTime){
         Optional<Attendance> attendance = attendanceRepository.findByStartTime(localDateTime);
         return attendance;
