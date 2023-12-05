@@ -29,13 +29,38 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final TokenRepository tokenRepository;
 
-    public AuthenticationResponse registration(RegistrationRequestBase registrationRequest, Role role) {
+    public AuthenticationResponse registration(RegistrationRequest registrationRequest) {
         var user = User.builder()
                 .firstName(registrationRequest.getFirstName())
                 .lastName(registrationRequest.getLastName())
                 .email(registrationRequest.getEmail())
                 .password(passwordEncoder.encode(registrationRequest.getPassword()))
-                .role(role)
+                .role(Role.ADMIN)
+                .build();
+
+        var savedUser = userRepository.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        var refreshToken = jwtService.generateRefreshToken(user);
+        saveUserToken(savedUser, jwtToken);
+        return AuthenticationResponse.builder().accessToken(jwtToken).refreshToken(refreshToken).build();
+
+    }
+
+    public AuthenticationResponse registrationStudent(StudentRequest registrationRequest) {
+        var user = User.builder()
+                .firstName(registrationRequest.getFirstName())
+                .lastName(registrationRequest.getLastName())
+                .email(registrationRequest.getEmail())
+                .password(passwordEncoder.encode(registrationRequest.getPassword()))
+                .role(Role.USER)
+                .department(registrationRequest.getDepartment())
+                .program(registrationRequest.getProgram())
+                .yearOfSubmission(registrationRequest.getYearOfSubmission())
+                .dateOfBirth(registrationRequest.getDateOfBirth())
+                .idNo(registrationRequest.getIdNo())
+                .permanentAddress(registrationRequest.getPermanentAddress())
+                .phone(registrationRequest.getPhone())
+                .nationality(registrationRequest.getNationality())
                 .build();
 
         var savedUser = userRepository.save(user);

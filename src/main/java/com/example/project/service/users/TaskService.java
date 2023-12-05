@@ -1,4 +1,4 @@
-package com.example.project.service;
+package com.example.project.service.users;
 
 import com.example.project.domain.model.Task;
 import com.example.project.domain.exception.ResourceDoesNotExistException;

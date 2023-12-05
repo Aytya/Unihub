@@ -1,5 +1,7 @@
 package com.example.project.domain.model;
 
+import com.example.project.web.dto.CourseCreateDTO;
+import com.example.project.web.dto.StudentDto;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -26,5 +28,9 @@ public class Attendance {
     private Long lastUpdateTime;
     @Nullable
     private LocalDateTime startTime;
-    private String _group;
+
+    @ElementCollection
+    @CollectionTable(name = "attendance_students", joinColumns = @JoinColumn(name = "attendance_id"))
+    private List<StudentDto> userList;
+
 }

@@ -13,8 +13,11 @@ import java.util.Optional;
 
 
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
-    @Query("SELECT a FROM Attendance a WHERE a._group = :group")
-    List<Attendance> findAllByGroup(@Param("group") String group);
+
+//    @Query("SELECT a._group FROM Attendance a WHERE a.id = :id")
+//    Group findGroupById(@Param("id") Long id);
+//    @Query("SELECT a FROM Attendance a WHERE a._group = :group")
+//    List<Attendance> findAllByGroup(@Param("group") Group group);
 
     @Query("SELECT a FROM Attendance a WHERE a.startTime = :startTime")
     Optional<Attendance> findByStartTime(@Param("startTime") LocalDateTime startTime);

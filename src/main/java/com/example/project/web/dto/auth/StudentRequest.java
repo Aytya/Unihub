@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentRequest implements RegistrationRequestBase{
+public class StudentRequest{
 
     private String firstName;
     private String lastName;

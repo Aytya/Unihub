@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
     @Query("SELECT u FROM User u WHERE u.email = :email")
     User findUserByEmail(@Param("email") String email);
 
+    @Transactional
     @Modifying
     @Query("UPDATE User u SET u.image = :image WHERE u.id = :id")
     void addImage(@Param("id") Long id, @Param("image") String image);

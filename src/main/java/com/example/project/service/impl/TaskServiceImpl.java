@@ -4,7 +4,7 @@ import com.example.project.domain.role.Status;
 import com.example.project.domain.model.Task;
 import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.repository.TaskRepository;
-import com.example.project.service.TaskService;
+import com.example.project.service.users.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

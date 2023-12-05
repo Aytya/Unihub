@@ -1,7 +1,10 @@
 package com.example.project.web.controller.faculty;
 
+import com.example.project.domain.exception.ResourceDoesNotExistException;
 import com.example.project.domain.model.Attendance;
 import com.example.project.service.AttendanceService;
+import com.example.project.web.mapper.AttendanceMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +17,16 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/new_attendance")
+@RequiredArgsConstructor
 public class AttendanceController {
+
     @Autowired
     private AttendanceService attendanceService;
+    private final AttendanceMapper attendanceMapper;
 
-    @PostMapping("/create")
+    @PostMapping("/create/{group}")
     @PreAuthorize("hasAuthority('admin:create')")
-    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance){
+    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance) throws ResourceDoesNotExistException {
         attendance.setLastUpdateTime(System.currentTimeMillis());
         attendance.setStartTime(LocalDateTime.now());
         this.attendanceService.createAttendance(attendance);
@@ -73,11 +79,11 @@ public class AttendanceController {
         }
     }
 
-    @GetMapping("/{group}")
-    public ResponseEntity<List<Attendance>> getAttendance(@PathVariable String group){
+    @GetMapping("/{id}")
+    public ResponseEntity<Attendance> getAttendance(@PathVariable Long id){
         try{
-            List<Attendance> attendanceList = this.attendanceService.getAllAttendancesForGroup(group);
-            return new ResponseEntity<>(attendanceList, HttpStatus.OK);
+            Attendance attendance = this.attendanceService.getAttendanceById(id);
+            return new ResponseEntity<>(attendance, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }

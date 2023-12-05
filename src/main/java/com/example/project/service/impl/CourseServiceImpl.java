@@ -7,7 +7,7 @@ import com.example.project.domain.model.Course;
 import com.example.project.repository.CourseRepository;
 import com.example.project.repository.FacultyRepository;
 import com.example.project.web.mapper.CourseMapper2;
-import com.example.project.service.CourseService;
+import com.example.project.service.users.CourseService;
 import com.example.project.web.dto.CourseCreateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
