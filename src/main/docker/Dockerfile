@@ -1,4 +1,7 @@
-FROM openjdk:17-jdk-slim
-ARG JAR_FILE=*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+FROM maven:3.8.5-openjdk-17
+
+WORKDIR /U nihub
+COPY . .
+RUN mvn clean install
+
+CMD mvn spring-boot:run

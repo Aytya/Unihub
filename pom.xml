@@ -31,8 +31,8 @@
 <!--        <junit.jupiter.version>5.10.0</junit.jupiter.version>-->
         <spring.webflux>3.1.2</spring.webflux>
         <jedis.redis.version>5.0.2</jedis.redis.version>
-        <kafka.support.version>3.0.13</kafka.support.version>
-<!--        <flyway-core.version>9.22.2</flyway-core.version>-->
+<!--        <kafka.support.version>3.0.13</kafka.support.version>-->
+<!--        <flyway-core.version>9.22.3</flyway-core.version>-->
     </properties>
 
 
@@ -64,27 +64,31 @@
             <version>${jakarta.validation.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>${jedis.redis.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${redis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${redis.version}</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -202,12 +206,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>${redis.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator.version}</version>
@@ -230,25 +228,25 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka-test</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-core</artifactId>-->
-<!--            <version>9.22.3</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>9.22.3</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.flywaydb</groupId>-->
-<!--                <artifactId>flyway-maven-plugin</artifactId>-->
-<!--                <version>9.22.3</version>-->
-<!--                <configuration>-->
-<!--                    <url>jdbc:postgresql://localhost:5433/jwt_security</url>-->
-<!--                    <user>postgres</user>-->
-<!--                    <password>Mazayka2003</password>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>9.22.3</version>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5433/jwt_security</url>
+                    <user>postgres</user>
+                    <password>Mazayka2003</password>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
