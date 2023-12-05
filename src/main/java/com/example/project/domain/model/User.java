@@ -72,11 +72,7 @@ public class User implements UserDetails {
 
     @OneToMany
     @CollectionTable(name = "users_professors")
-    private List<Professor> professor;
-
-    @OneToMany
-    @CollectionTable(name = "users_courses")
-    private List<Course> courses;
+    private List<Professor> professo
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return role.getAuthorities();

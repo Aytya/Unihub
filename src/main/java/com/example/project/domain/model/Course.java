@@ -42,8 +42,5 @@ public class Course {
     @JsonBackReference
     private Faculty faculty;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "_user_id", nullable = false)
-    @JsonBackReference
-    private User user;
+
 }
